@@ -1,0 +1,17 @@
+-- build.settings for project: aaa
+-- Managed with http://CoronaProjectManager.com
+-- Copyright 2016 . All Rights Reserved.
+
+settings = {
+	orientation =
+	{
+		--default = "landscapeRight",
+	},
+	iphone =
+	{
+		plist=
+		{
+			--UIStatusBarHidden=true,
+		},
+	},
+}
