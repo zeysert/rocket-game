@@ -1,18 +1,17 @@
 --
--- Project: aaa
 -- Description: 
 --
 -- Version: 1.0
--- Managed with http://CoronaProjectManager.com
 --
--- Copyright 2016 . All Rights Reserved.
+-- Copyright 2020 . All Rights Reserved.
 -- 
 
 --housekeeping stuff
 display.setStatusBar ( display.HiddenStatusBar )
 cx = display.contentCenterX; --print("x= " .. cx*2)
 cy = display.contentCenterY; --print ( "y= " ..cy*2 )
---local physics = require ( "physics" )
+--local physics = require ( "physics" )
+
 --forward references
 local sky
 local rocket
@@ -21,7 +20,8 @@ local lefta
 local righta
 local firea
 local startgame
-local startscreenlocal rocketup
+local startscreen
+local rocketup
 
 --preload audio
 
@@ -33,7 +33,8 @@ function startscreen()
 	
 	rocket = display.newImage("rocket.png")
 	rocket.x = cx ; rocket.y = display.contentHeight-300
-	rocket:scale ( 0.3, 0.3 )	rocket:addEventListener ( "tap", rocketup )
+	rocket:scale ( 0.3, 0.3 )
+	rocket:addEventListener ( "tap", rocketup )
 	
 	starttext = display.newText(  "START", 0, 0, "Verdana", 70 )
 	starttext.x = cx ; starttext.y = cy
@@ -48,7 +49,10 @@ function startgame(event)
 	firea = display.newImage("fire.png") ; firea.x = display.contentWidth-70 ; firea.y = display.contentHeight-60 ; firea:scale ( 2, 2 )
 	lefta:addEventListener ( "tap", golefta )
 	righta:addEventListener ( "tap", gorighta )
-	firea:addEventListener ( "tap", fireaaa )	--physics.start( )	--physics.setGravity( cx, display.contentHeight )	--physics.addBody ( rocket, {density=0.000000001, friction = 1})
+	firea:addEventListener ( "tap", fireaaa )
+	--physics.start( )
+	--physics.setGravity( cx, display.contentHeight )
+	--physics.addBody ( rocket, {density=0.000000001, friction = 1})
 end
 function golefta(event)
 	rocketleft = transition.to ( rocket, {time = 500, x = rocket.x-40} )
@@ -71,6 +75,16 @@ function fireaaa(event)
 	pewpewpew()
 	return true
 end
-function rocketup()	transition.cancel ( rocket.falla )	transition.cancel ( rocket.upa )	rocket.upa = transition.to ( rocket, {time=500, y = rocket.y-100, onComplete=rocketfalla} )	return trueendfunction rocketfalla()		rocket.falla = transition.to ( rocket, {time=300, y = rocket.y+30, onComplete=rocketfalla} )end
+function rocketup()
+	transition.cancel ( rocket.falla )
+	transition.cancel ( rocket.upa )
+	rocket.upa = transition.to ( rocket, {time=500, y = rocket.y-100, onComplete=rocketfalla} )
+	return true
+end
+function rocketfalla()
+		rocket.falla = transition.to ( rocket, {time=300, y = rocket.y+30, onComplete=rocketfalla} )
+end
+
+
 --start
 startscreen()
